@@ -1,4 +1,4 @@
-const Item = require('.../../models/Item')
+const Item = require('../../models/Item')
 
 module.exports = {
     createItem,
@@ -11,6 +11,7 @@ module.exports = {
 async function createItem(req, res) {
     try {
         const createdItem = await Item.create(req.body)
+        res.status(200).json(createdItem)
     } catch(e) {
         res.status(400).json(e)
     }
@@ -20,7 +21,7 @@ async function createItem(req, res) {
 async function getItems(req, res) {
     try {
         const items = await Item.find({})
-        res.status(200).json(projects)
+        res.status(200).json(items)
     } catch(e) {
         res.status(400).json(e)
     }
@@ -43,7 +44,7 @@ async function updateItem(req, res) {
 async function deleteItem(req, res) {
     Item.findByIdAndDelete(req.params.id, (err, deletedItem)=> {
         if(!err) {
-            res.status(200).json(deleteItem)
+            res.status(200).json(deletedItem)
         } else {
             res.status(400).json(err)
         }
