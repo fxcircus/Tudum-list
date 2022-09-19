@@ -1,5 +1,9 @@
+// import logo from "/tudumlis_icon_transperent.png"
 export default function App() {
     return(
-        <h1>hello world</h1>
+        <div>
+            <img src={"/tudumlist_icon_transperent.png"}/>
+            <h2>Netflix Watchlist</h2>
+        </div>
     )
 }
