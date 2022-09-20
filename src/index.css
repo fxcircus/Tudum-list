@@ -2,6 +2,7 @@
     --background-color: #181818;
     --title-color: #e50914;
     --text-color: #f6f6f6;
+    --box-color: #6c6767;
 }
 
 html {
@@ -9,7 +10,6 @@ html {
 }
 
 .homepage {
-    
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -17,5 +17,10 @@ html {
     justify-items: center;
     color: var(--text-color);
     font-family: Arial, Helvetica, sans-serif;
+}
 
+.List {
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: 5px;
+    box-shadow: 0px 1px 9px var(--box-color);
 }
