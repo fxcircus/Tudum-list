@@ -44,12 +44,16 @@ a:visited {
 
 input {
     border: none;
-    border-radius: 10px;
-    background-color: #04AA6D;
-    color: var(--title-color);
+    /* border-radius: 10px; */
+    background-color: transparent;
+    color: var(--text-color);
+    width: 80%;
 }
 
-/* Customize the label (the container) */
+input:focus {
+    outline: none;
+}
+
 .container {
     display: block;
     position: relative;
@@ -57,19 +61,17 @@ input {
     margin-bottom: 25px;
     cursor: pointer;
     font-size: 22px;
-  }
-  
-  /* Hide the browser's default checkbox */
-  .container input {
+}
+
+.container input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
     height: 0;
     width: 0;
-  }
-  
-  /* Create a custom checkbox */
-  .checkmark {
+}
+
+.checkmark {
     position: absolute;
     top: 0;
     left: 0;
@@ -77,28 +79,23 @@ input {
     width: 23px;
     background-color: none;
     border: 2px solid rgba(255, 255, 255, .5);
-    /* border-radius: 5px; */
-  }
-  
-  /* On mouse-over, add a grey background color */
-  .container:hover input ~ .checkmark {
-    border: 2px solid rgba(255, 255, 255, .9);
-  }
+}
 
-  /* Create the checkmark/indicator (hidden when not checked) */
-  .checkmark:after {
+.container:hover input ~ .checkmark {
+    border: 2px solid rgba(255, 255, 255, .9);
+}
+
+.checkmark:after {
     content: "";
     position: absolute;
     display: none;
-  }
-  
-  /* Show the checkmark when checked */
-  .container input:checked ~ .checkmark:after {
+}
+
+.container input:checked ~ .checkmark:after {
     display: block;
-  }
-  
-  /* Style the checkmark/indicator */
-  .container .checkmark:after {
+}
+
+.container .checkmark:after {
     left: 9px;
     top: 5px;
     width: 5px;
@@ -108,4 +105,21 @@ input {
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
-  }
+}
+
+button {
+    background-color: transparent;
+    color: rgba(255, 255, 255, .5);
+    border: none;
+    height: 25px;
+    width: 25x;
+    font-size: x-large;
+}
+
+.add-new-item-div {
+    margin: 8px 0px 8px 4px;
+}
+
+.add-new-item-div button {
+    margin-right: 25px;
+}
