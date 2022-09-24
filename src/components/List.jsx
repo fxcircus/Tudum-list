@@ -23,16 +23,17 @@ export default function List() {
                                     <span className="checkmark"></span>
                                 </label>
                             </td>
-                            <td><a href={item.url} target="_blank" text>{item.title}</a></td>
+                            <td><a href={item.url} target="_blank" text>{item.title}</a></td> 
                             <td>{item.type === "show" ? "📺" : "🎬"}</td>
                             <td>{print_stars(item.rank)}</td>
+                            <td><button>x</button></td>
                         </tr>
                     )
                 })}
                 </tfoot>
             </table>
             <div className="add-new-item-div">
-                <button>+</button>
+                <button>+</button>  
                 <input type="text" placeholder="List item"></input>
             </div>         
         </div>

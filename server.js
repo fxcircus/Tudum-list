@@ -13,6 +13,11 @@ app.use(express.static(path.join(__dirname, 'build')))
 // API middleware:
 app.use('/api/items', require('./routes/api/items'))
 
+// "catch all" route
+app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
+
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
     console.log(`Backend is listening on port ${PORT}`)
