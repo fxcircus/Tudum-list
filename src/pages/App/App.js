@@ -22,7 +22,7 @@ export default function App() {
         <div className="homepage">
             <img src={"/tudumlist_icon_transperent.png"}/>
             <h2>Netflix Watchlist</h2>
-            <List />
+            <List items={items} setItems={setItems} />
         </div>
     )
 }

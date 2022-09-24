@@ -4,7 +4,10 @@ const Schema = mongoose.Schema
 
 const itemSchema = new Schema ({
     title: {type: String, required: true},
-    itemList: Array
+    type: String,
+    isChecked: Boolean,
+    url: String,
+    rank: Number
 },
 {
     timestamps: true
