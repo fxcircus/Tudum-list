@@ -1,5 +1,6 @@
-import data from "../utiliies/sample_data"
+// import data from "../utiliies/sample_data"
 import AddItemList from "./AddItemForm"
+import { deleteItem } from "../utiliies/api/items-api"
 
 export default function List({ items, setItems, loadItems}) {
     const print_stars = (rank) => {
@@ -8,6 +9,11 @@ export default function List({ items, setItems, loadItems}) {
             res += "⭑"
         }
         return res
+    }
+
+    const delItem = async (itemId) => {
+        const deletedItem = await deleteItem(itemId)
+        loadItems()
     }
 
     const loaded = () => {
@@ -27,7 +33,7 @@ export default function List({ items, setItems, loadItems}) {
                                 <td><a href={item.url} target="_blank" text>{item.title}</a></td> 
                                 <td>{item.type === "show" ? "📺" : "🎬"}</td>
                                 <td>{print_stars(item.rank)}</td>
-                                <td><button>x</button></td>
+                                <td><button onClick={(e) => {delItem(item._id)}}>x</button></td>
                             </tr>
                         )
                     })}

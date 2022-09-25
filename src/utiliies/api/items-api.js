@@ -13,10 +13,10 @@ export async function getItems() {
 
 // UPDATE
 export async function editItem (itemId) {
-    return sendRequest (`${BASE_URL}/itemId`, 'PUT', itemId)
+    return sendRequest (`${BASE_URL}/${itemId}`, 'PUT', itemId)
 }
 
 // DELETE
 export async function deleteItem (itemId) {
-    return sendRequest (`${BASE_URL}/${itemId}`,'DELETE', itemId)
+    return sendRequest (`${BASE_URL}/${itemId}`,'DELETE')
 }
