@@ -1,6 +1,7 @@
 import { useState } from "react"
+import { createItem } from "../utiliies/api/items-api"
 
-export default function AddItemList () {
+export default function AddItemList ({ loadItems }) {
     const [ formData, setFormData ] = useState ({
         title : "",
         isChecked: false,
@@ -12,8 +13,15 @@ export default function AddItemList () {
         setFormData({...formData, [event.target.name]: event.target.value})
     }
 
+    const handleSubmit = async (event) => {
+        event.preventDefault()
+        await createItem (formData)
+        setFormData({ title: "" })
+        loadItems()
+    }
+
     return (
-        <form className="add-new-item-div">
+        <form className="add-new-item-div" onSubmit={handleSubmit}>
             <button>+</button>  
             <input
                 type="text"

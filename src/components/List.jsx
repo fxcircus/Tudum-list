@@ -1,7 +1,7 @@
 import data from "../utiliies/sample_data"
 import AddItemList from "./AddItemForm"
 
-export default function List({ items, setItems }) {
+export default function List({ items, setItems, loadItems}) {
     const print_stars = (rank) => {
         let res = ""
         for (let i = 0; i <= rank; i++) {
@@ -33,7 +33,7 @@ export default function List({ items, setItems }) {
                     })}
                     </tfoot>
                 </table>
-                <AddItemList />     
+                <AddItemList loadItems={loadItems} />     
             </div>
         )
     }
