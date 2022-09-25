@@ -31,9 +31,9 @@ export default function List({ items, setItems, loadItems}) {
                                     </label>
                                 </td>
                                 <td><a href={item.url} target="_blank" text>{item.title}</a></td> 
-                                <td>{item.type === "show" ? "📺" : "🎬"}</td>
+                                <td>{item.type === "tv" ? "📺" : "🎬"}</td>
                                 <td>{print_stars(item.rank)}</td>
-                                <td><button onClick={(e) => {delItem(item._id)}}>x</button></td>
+                                <td className="delete-button"><button onClick={(e) => {delItem(item._id)}}>x</button></td>
                             </tr>
                         )
                     })}

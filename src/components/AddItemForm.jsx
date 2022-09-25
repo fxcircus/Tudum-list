@@ -6,7 +6,8 @@ export default function AddItemList ({ loadItems }) {
         title : "",
         isChecked: false,
         rank: 0,
-        type: ""
+        type: "",
+        type: "tv"
     })
 
     const handleChange = (event) => {
@@ -30,10 +31,10 @@ export default function AddItemList ({ loadItems }) {
                 value={formData.title}
                 onChange={handleChange}
             />
-            <select className="custom-select" name="type" size="2">
-                <option value="tv">📺</option>
-                <option value="movie">🎬</option>
-            </select>
+                <select name="type" id="type" onChange={handleChange}>
+                    <option value="tv">📺</option>
+                    <option value="movie">🎬</option>
+                </select>
             
         </form>  
     )

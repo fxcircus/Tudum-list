@@ -126,6 +126,16 @@ button {
 }
 
 select {
-    display: flex;
-    flex-direction: row;
+    background: transparent;
+    border: none;
+}
+
+.delete-button {
+    opacity:0.1;
+}
+
+.delete-button:hover {
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
 }
