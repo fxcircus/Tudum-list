@@ -1,4 +1,5 @@
 import data from "../utiliies/sample_data"
+import AddItemList from "./AddItemForm"
 
 export default function List({ items, setItems }) {
     const print_stars = (rank) => {
@@ -32,10 +33,7 @@ export default function List({ items, setItems }) {
                     })}
                     </tfoot>
                 </table>
-                <div className="add-new-item-div">
-                    <button>+</button>  
-                    <input type="text" placeholder="List item"></input>
-                </div>         
+                <AddItemList />     
             </div>
         )
     }

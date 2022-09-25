@@ -44,10 +44,9 @@ a:visited {
 
 input {
     border: none;
-    /* border-radius: 10px; */
     background-color: transparent;
     color: var(--text-color);
-    width: 80%;
+    /* width: 80%; */
 }
 
 input:focus {
@@ -118,8 +117,15 @@ button {
 
 .add-new-item-div {
     margin: 8px 0px 8px 4px;
+    display: flex;
+    flex-direction: row;
 }
 
 .add-new-item-div button {
     margin-right: 25px;
+}
+
+select {
+    display: flex;
+    flex-direction: row;
 }
