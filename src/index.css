@@ -139,3 +139,11 @@ select {
     align-items: center;
     opacity: 1;
 }
+
+.checked {
+    color: var(--title-color)
+}
+
+.not-checked {
+    color:rgba(255, 255, 255, .5)
+}

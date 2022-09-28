@@ -3,12 +3,8 @@ import AddItemList from "./AddItemForm"
 import { deleteItem } from "../utiliies/api/items-api"
 
 export default function List({ items, setItems, loadItems}) {
-    const print_stars = (rank) => {
-        let res = ""
-        for (let i = 0; i <= rank; i++) {
-            res += "⭑"
-        }
-        return res
+    const starCssClass = (rank, starNum) => {
+        return rank >= starNum ? "checked" : "not-checked"
     }
 
     const delItem = async (itemId) => {
@@ -32,7 +28,13 @@ export default function List({ items, setItems, loadItems}) {
                                 </td>
                                 <td><a href={item.url} target="_blank" text>{item.title}</a></td> 
                                 <td>{item.type === "tv" ? "📺" : "🎬"}</td>
-                                <td>{print_stars(item.rank)}</td>
+                                <td>
+                                    <button className={starCssClass(item.rank, 1)}>⭑</button>
+                                    <button className={starCssClass(item.rank, 2)}>⭑</button>
+                                    <button className={starCssClass(item.rank, 3)}>⭑</button>
+                                    <button className={starCssClass(item.rank, 4)}>⭑</button>
+                                    <button className={starCssClass(item.rank, 5)}>⭑</button>
+                                </td>
                                 <td className="delete-button"><button onClick={(e) => {delItem(item._id)}}>x</button></td>
                             </tr>
                         )
