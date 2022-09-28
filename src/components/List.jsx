@@ -38,7 +38,11 @@ export default function List({ items, setItems, loadItems}) {
                                         <span className="checkmark"></span>
                                     </label>
                                 </td>
-                                <td><a href={item.url} target="_blank" text>{item.title}</a></td> 
+                                <td>
+                                    <a href={item.url} target="_blank" text>
+                                        {item.isChecked ? <del>{item.title}</del> : item.title}
+                                    </a>
+                                </td> 
                                 <td>{item.type === "tv" ? "📺" : "🎬"}</td>
                                 <td>
                                     <button className={starCssClass(item.rank, 1)} onClick={(e) => {update(item._id, "rank", 1)}}>⭑</button>
