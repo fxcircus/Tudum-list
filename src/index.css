@@ -147,3 +147,7 @@ select {
 .not-checked {
     color:rgba(255, 255, 255, .5)
 }
+
+.star:hover {
+    cursor: pointer;
+}

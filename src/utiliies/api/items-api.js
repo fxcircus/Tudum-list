@@ -12,8 +12,8 @@ export async function getItems() {
 }
 
 // UPDATE
-export async function editItem (itemId) {
-    return sendRequest (`${BASE_URL}/${itemId}`, 'PUT', itemId)
+export async function updateItem (itemId, itemData) {
+    return sendRequest (`${BASE_URL}/${itemId}`, 'PUT', itemData)
 }
 
 // DELETE
