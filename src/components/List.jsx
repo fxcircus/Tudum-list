@@ -15,10 +15,12 @@ export default function List({ items, setItems, loadItems}) {
         loadItems()
     }
 
-    const updateRank = async (id, newRank) => {
-        const itemRank = { rank: newRank }
-        const updatedItem = await updateItem(id, itemRank)
+    const update = async (itemId, key, val) => {
+        let keyValPair = {}
+        keyValPair[key] = val
+        const updatedItem = await updateItem(itemId, keyValPair)
         loadItems()
+        setRender(!render)
     }
 
     const loaded = () => {
@@ -31,18 +33,19 @@ export default function List({ items, setItems, loadItems}) {
                             <tr key={idx}>
                                 <td>
                                     <label className="container">
-                                        <input type="checkbox" checked={item.isChecked ? "checked": null}></input>
+                                        <input type="checkbox" checked={item.isChecked ? "checked": null}
+                                        onChange={(e) => {update(item._id, "isChecked", !item.isChecked)}} />
                                         <span className="checkmark"></span>
                                     </label>
                                 </td>
                                 <td><a href={item.url} target="_blank" text>{item.title}</a></td> 
                                 <td>{item.type === "tv" ? "📺" : "🎬"}</td>
                                 <td>
-                                    <button className={starCssClass(item.rank, 1)} onClick={(e) => {updateRank(item._id, 1)}}>⭑</button>
-                                    <button className={starCssClass(item.rank, 2)} onClick={(e) => {updateRank(item._id, 2)}}>⭑</button>
-                                    <button className={starCssClass(item.rank, 3)} onClick={(e) => {updateRank(item._id, 3)}}>⭑</button>
-                                    <button className={starCssClass(item.rank, 4)} onClick={(e) => {updateRank(item._id, 4)}}>⭑</button>
-                                    <button className={starCssClass(item.rank, 5)} onClick={(e) => {updateRank(item._id, 5)}}>⭑</button>
+                                    <button className={starCssClass(item.rank, 1)} onClick={(e) => {update(item._id, "rank", 1)}}>⭑</button>
+                                    <button className={starCssClass(item.rank, 2)} onClick={(e) => {update(item._id, "rank",  2)}}>⭑</button>
+                                    <button className={starCssClass(item.rank, 3)} onClick={(e) => {update(item._id, "rank",  3)}}>⭑</button>
+                                    <button className={starCssClass(item.rank, 4)} onClick={(e) => {update(item._id, "rank",  4)}}>⭑</button>
+                                    <button className={starCssClass(item.rank, 5)} onClick={(e) => {update(item._id, "rank",  5)}}>⭑</button>
                                     
                                 </td>
                                 <td className="delete-button"><button onClick={(e) => {delItem(item._id)}}>x</button></td>
