@@ -61,7 +61,7 @@ export default function List({ items, setItems, loadItems}) {
                 <AddItemList loadItems={loadItems} />
                 <script async src="https://cse.google.com/cse.js?cx=e60ce9e2fa77c4273">
                 </script>
-                <div class="gcse-search"></div> 
+                <div className="gcse-search"></div> 
             </div>
         )
     }

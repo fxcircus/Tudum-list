@@ -21,7 +21,7 @@ export default function App() {
     return(
         <div className="homepage">
             <img src={"/tudumlist_icon_transperent.png"}/>
-            <h2>Netflix Watchlist</h2>
+            <h3>Streaming service watch list</h3>
             <List items={items} setItems={setItems} loadItems={loadItems} />
         </div>
     )

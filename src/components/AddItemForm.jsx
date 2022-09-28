@@ -1,16 +1,26 @@
 import { useState } from "react"
 import { createItem } from "../utiliies/api/items-api"
+import { googleTitle } from "../utiliies/api/google-search-api"
 
 export default function AddItemList ({ loadItems }) {
+    const [ googleUrl, setGoogleUrl ] = useState("")
     const [ formData, setFormData ] = useState ({
         title : "",
         isChecked: false,
         rank: 0,
         type: "",
-        type: "tv"
+        type: "tv",
+        url: ""
     })
 
+    const getUrl = async (currText) => {
+        let resTxt = await googleTitle(currText)
+        const newObj = { url: resTxt}
+        setFormData(formData => ({...formData, ...newObj}))
+    }
+
     const handleChange = (event) => {
+        getUrl(event.target.value)
         setFormData({...formData, [event.target.name]: event.target.value})
     }
 
