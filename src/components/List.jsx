@@ -54,7 +54,10 @@ export default function List({ items, setItems, loadItems}) {
                     })}
                     </tfoot>
                 </table>
-                <AddItemList loadItems={loadItems} />     
+                <AddItemList loadItems={loadItems} />
+                <script async src="https://cse.google.com/cse.js?cx=e60ce9e2fa77c4273">
+                </script>
+                <div class="gcse-search"></div> 
             </div>
         )
     }
