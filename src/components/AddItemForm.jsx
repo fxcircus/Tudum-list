@@ -3,7 +3,6 @@ import { createItem } from "../utiliies/api/items-api"
 import { googleTitle } from "../utiliies/api/google-search-api"
 
 export default function AddItemList ({ loadItems }) {
-    const [ googleUrl, setGoogleUrl ] = useState("")
     const [ formData, setFormData ] = useState ({
         title : "",
         isChecked: false,
@@ -13,14 +12,15 @@ export default function AddItemList ({ loadItems }) {
         url: ""
     })
 
-    const getUrl = async (currText) => {
+    const getUrl = async (lastEvt) => {
+        const currText = lastEvt.target.value
         let resTxt = await googleTitle(currText)
         const newObj = { url: resTxt}
         setFormData(formData => ({...formData, ...newObj}))
     }
 
     const handleChange = (event) => {
-        getUrl(event.target.value)
+        getUrl(event)
         setFormData({...formData, [event.target.name]: event.target.value})
     }
 

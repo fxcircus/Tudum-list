@@ -1,4 +1,5 @@
 import List from "../../components/List"
+import Foooter from "../../components/Footer"
 import { useState, useEffect } from "react"
 import { getItems } from "../../utiliies/api/items-api"
 
@@ -23,6 +24,7 @@ export default function App() {
             <img src={"/tudumlist_icon_transperent.png"}/>
             <h3>Cross-platform watch list</h3>
             <List items={items} setItems={setItems} loadItems={loadItems} />
+            <Foooter />
         </div>
     )
 }
