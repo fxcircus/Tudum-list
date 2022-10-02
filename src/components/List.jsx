@@ -33,7 +33,7 @@ export default function List({ items, setItems, loadItems}) {
                             <tr key={idx}>
                                 <td>
                                     <label className="container">
-                                        <input className="new-item-input" type="checkbox" checked={item.isChecked ? "checked": null}
+                                        <input type="checkbox" checked={item.isChecked ? "checked": null}
                                         onChange={(e) => {update(item._id, "isChecked", !item.isChecked)}} />
                                         <span className="checkmark"></span>
                                     </label>
