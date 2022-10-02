@@ -33,7 +33,7 @@ export default function List({ items, setItems, loadItems}) {
                             <tr key={idx}>
                                 <td>
                                     <label className="container">
-                                        <input type="checkbox" checked={item.isChecked ? "checked": null}
+                                        <input className="new-item-input" type="checkbox" checked={item.isChecked ? "checked": null}
                                         onChange={(e) => {update(item._id, "isChecked", !item.isChecked)}} />
                                         <span className="checkmark"></span>
                                     </label>
@@ -43,7 +43,7 @@ export default function List({ items, setItems, loadItems}) {
                                         {item.isChecked ? <del>{item.title}</del> : item.title}
                                     </a>
                                 </td> 
-                                <td>{item.type === "tv" ? "📺" : "🎬"}</td>
+                                <td className="content-type">{item.type === "tv" ? "📺" : "🎬"}</td>
                                 <td>
                                     <button className={starCssClass(item.rank, 1)} onClick={(e) => {update(item._id, "rank", 1)}}>⭑</button>
                                     <button className={starCssClass(item.rank, 2)} onClick={(e) => {update(item._id, "rank",  2)}}>⭑</button>
