@@ -44,13 +44,12 @@ export default function List({ items, setItems, loadItems}) {
                                     </a>
                                 </td> 
                                 <td className="content-type">{item.type === "tv" ? "📺" : "🎬"}</td>
-                                <td>
+                                <td className="rank-buttons">
                                     <button className={starCssClass(item.rank, 1)} onClick={(e) => {update(item._id, "rank", 1)}}>⭑</button>
                                     <button className={starCssClass(item.rank, 2)} onClick={(e) => {update(item._id, "rank",  2)}}>⭑</button>
                                     <button className={starCssClass(item.rank, 3)} onClick={(e) => {update(item._id, "rank",  3)}}>⭑</button>
                                     <button className={starCssClass(item.rank, 4)} onClick={(e) => {update(item._id, "rank",  4)}}>⭑</button>
                                     <button className={starCssClass(item.rank, 5)} onClick={(e) => {update(item._id, "rank",  5)}}>⭑</button>
-                                    
                                 </td>
                                 <td className="delete-button"><button onClick={(e) => {delItem(item._id)}}>x</button></td>
                             </tr>

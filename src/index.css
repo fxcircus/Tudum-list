@@ -115,6 +115,10 @@ button {
     font-size: x-large;
 }
 
+.rank-buttons {
+    display: flex;
+}
+
 .add-new-item-div {
     margin: 8px 0px 8px 4px;
     display: flex;
@@ -162,9 +166,10 @@ select {
 
 footer a {
     position: fixed;
-    left: 45%;
+    left: 42%;
     bottom: 2%;
     color: #6c6767;
+    background-color: #181818;
 }
 
 a:hover {
@@ -219,7 +224,7 @@ a:hover {
     .star {
         font-size: medium;
     }
-    /* footer {
-        display: none;
-    } */
+    footer a{
+        left: 33%;
+    }
 }
