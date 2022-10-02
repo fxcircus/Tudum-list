@@ -10,10 +10,8 @@ const contextOptions = {
 }
 
 ReactDOM.render(
-    <React.StrictMode>
         <FronteggProvider contextOptions={contextOptions} hostedLoginBox={true}>
             <App />
-        </FronteggProvider>
-    </React.StrictMode>,
+        </FronteggProvider>,
     document.getElementById('root')
 )
