@@ -163,3 +163,22 @@ footer a {
 a:hover {
     text-decoration: underline overline;
 }
+
+.user-area {
+    position: absolute;
+    left: 1%;
+    top: 5;
+    font-size: small;
+}
+
+.user-area img {
+    height: 30px;
+    width: 30px;
+    border-radius: 5px; 
+}
+
+.user-area button {
+    font-size: small;
+    margin-top: -10px;
+    margin-left: -10px;
+}

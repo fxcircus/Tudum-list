@@ -24,11 +24,11 @@ export default function App() {
     }, [])
 
     // Uncomment this to redirect to login automatically
-    // useEffect(() => {
-    //   if (!isAuthenticated) {
-    // loginWithRedirect();
-    //   }
-    // }, [isAuthenticated, loginWithRedirect]);
+    useEffect(() => {
+      if (!isAuthenticated) {
+    loginWithRedirect()
+      }
+    }, [isAuthenticated, loginWithRedirect])
 
     const logout = () => {
         const baseUrl = ContextHolder.getContext().baseUrl
@@ -39,20 +39,23 @@ export default function App() {
         <div className="App">
             { isAuthenticated ? (
             <div className="homepage">
+                <div className="user-area">
+                    <p>
+                    <img src={user?.profilePictureUrl} alt={user?.name}/>
+                    <span>{user?.name}'s List</span>
+                    </p>
+                    <button onClick={() => logout()}>Logout</button>
+                </div>
                 <img src={"/tudumlist_icon_transperent.png"}/>
                 <h3>Cross-platform watch list</h3>
                 <List items={items} setItems={setItems} loadItems={loadItems} />
-                <div>
-                    <span>Logged in as: {user?.name}</span>
-                    <button onClick={() => logout()}>Click to logout</button>
-                </div>  
                 <Foooter />
             </div>
         ) : (
             <div className="homepage">
-                <div>
+                {/* <div>
                     <button onClick={() => logout()}>Click to logout</button>
-                </div>
+                </div> */}
                 <button onClick={() => loginWithRedirect()}>Click me to login</button>
             </div>
         )}
