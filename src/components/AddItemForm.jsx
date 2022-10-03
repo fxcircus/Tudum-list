@@ -41,7 +41,7 @@ export default function AddItemList ({ loadItems }) {
                 value={formData.title}
                 onChange={handleChange}
             />
-                <select name="type" id="type" onChange={handleChange}>
+                <select className="type-select" name="type" id="type" onChange={handleChange}>
                     <option value="tv">📺</option>
                     <option value="movie">🎬</option>
                 </select>

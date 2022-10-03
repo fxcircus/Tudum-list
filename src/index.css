@@ -203,7 +203,7 @@ a:hover {
     html {
         font-size: small;
     }
-    .content-type {
+    .content-type, .type-select {
         display: none;
     }
     .checkmark {
@@ -224,7 +224,10 @@ a:hover {
     .star {
         font-size: medium;
     }
-    footer a{
+    .List {
+        margin-bottom: 20px;
+    }
+    footer a {
         left: 33%;
     }
 }
