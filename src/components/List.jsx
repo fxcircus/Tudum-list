@@ -2,6 +2,7 @@
 import { useState } from "react"
 import AddItemList from "./AddItemForm"
 import { deleteItem, updateItem } from "../utiliies/api/items-api"
+import { sortItemsArr } from "../utiliies/sorting/sortData"
 
 export default function List({ items, setItems, loadItems}) {
     const [ render, setRender ] = useState(false)
@@ -26,6 +27,10 @@ export default function List({ items, setItems, loadItems}) {
         setRender(!render)
     }
 
+    const changeSortOrder = (col) => {
+        console.log(`clicked sort from ${col}`)
+    }
+
     const loaded = () => {
         return (
             <div className="List">
@@ -33,9 +38,9 @@ export default function List({ items, setItems, loadItems}) {
                     <thead>
                         <tr className="table-title-row">
                             <td></td>
-                            <td>Title {titleCol}</td>
-                            <td>Type {typeCol}</td>
-                            <td>Rank {rankCol}</td>
+                            <td><button className="sort-button" onClick={(e) => {changeSortOrder('title')}}>Title {titleCol}</button></td>
+                            <td><botton className="sort-button" onClick={(e) => {changeSortOrder('type')}}>Type {typeCol}</botton></td>
+                            <td><button className="sort-button" onClick={(e) => {changeSortOrder('rank')}}>Rank {rankCol}</button></td>
                             <td></td>
                         </tr>
                         

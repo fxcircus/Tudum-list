@@ -25,7 +25,7 @@ const selectionSort = (arr) => {
         }
         if (minIdx !== i) {
             noSwapsOnLastIteration = false
-            tmpVal = arr[i]
+            const tmpVal = arr[i]
             arr[i] = arr[minIdx]
             arr[minIdx] = tmpVal
         }

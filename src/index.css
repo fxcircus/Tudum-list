@@ -31,9 +31,13 @@ td {
     padding-top: 10px;
 }
 
-.table-title-row{
+.table-title-row, .sort-button{
     font-size: small;
     color: var(--box-color)
+}
+
+.sort-button:hover {
+    cursor: pointer;
 }
 
 a {
