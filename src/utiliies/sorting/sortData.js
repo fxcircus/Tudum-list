@@ -6,7 +6,7 @@ const rowNumFromStr = (arr) => {
   })
 }
 
-const selectionSort = (arr) => {
+const selectionSortAsc = (arr) => {
     let noSwapsOnLastIteration
     for (let i = 0; i < arr.length; i++) {
         let minIdx = i
@@ -23,6 +23,25 @@ const selectionSort = (arr) => {
     if (noSwapsOnLastIteration) break
     }
     return arr
+}
+
+const selectionSortDsc = (arr) => {
+  let noSwapsOnLastIteration
+  for (let i = 0; i < arr.length; i++) {
+      let maxIdx = i
+      noSwapsOnLastIteration = true
+      for (let j = i + 1; j < arr.length; j++) {
+        if(arr[j].rowNum > arr[maxIdx].rowNum) maxIdx  = j
+      }
+      if (maxIdx !== i) {
+          noSwapsOnLastIteration = false
+          const tmpVal = arr[i]
+          arr[i] = arr[maxIdx]
+          arr[maxIdx] = tmpVal
+      }
+  if (noSwapsOnLastIteration) break
+  }
+  return arr
 }
 
 // Move items where isChecked val is "true" to end of list
@@ -50,17 +69,15 @@ const setRowNum = (arr) => {
   })
 }
 
-const sortItemsArr = (arr, column = "title") => {
+export function sortItemsArr(arr, column = "title", order = "↓") {
   rowNumFromStr(arr)
-  selectionSort(arr)
+  order === "↓" ? selectionSortAsc(arr) : selectionSortDsc(arr)
   moveCheckedItemsToEnd(arr)
   setRowNum(arr)
-  console.log(arr) 
+  // console.log(arr)
+  return arr
 }
 
-module.exports = (
-  sortItemsArr
-)
 
 /* Result:
 {title:"deadwood", rowNum: 0, isChecked: false},
