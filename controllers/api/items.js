@@ -20,7 +20,7 @@ async function createItem(req, res) {
 // Read
 async function getItems(req, res) {
     try {
-        const items = await Item.find({})
+        const items = await Item.find({}).sort( { rowNum: 1 }) // sort by rowNum field in ascending order
         res.status(200).json(items)
     } catch(e) {
         res.status(400).json(e)

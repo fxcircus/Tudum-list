@@ -5,6 +5,9 @@ import { deleteItem, updateItem } from "../utiliies/api/items-api"
 
 export default function List({ items, setItems, loadItems}) {
     const [ render, setRender ] = useState(false)
+    const [ titleCol, setTitleCol] = useState("↑")
+    const [ typeCol, setTypeCol] = useState("↓")
+    const [ rankCol, setRankCol] = useState("↓")
 
     const starCssClass = (rank, starNum) => {
         return rank >= starNum ? "star checked" : "star not-checked"
@@ -30,9 +33,9 @@ export default function List({ items, setItems, loadItems}) {
                     <thead>
                         <tr className="table-title-row">
                             <td></td>
-                            <td>Title ↑</td>
-                            <td>Type ↓</td>
-                            <td>Rank ↓</td>
+                            <td>Title {titleCol}</td>
+                            <td>Type {typeCol}</td>
+                            <td>Rank {rankCol}</td>
                             <td></td>
                         </tr>
                         
@@ -53,7 +56,7 @@ export default function List({ items, setItems, loadItems}) {
                                         {item.isChecked ? <del>{item.title}</del> : item.title}
                                     </a>
                                 </td> 
-                                <td className="content-type">{item.type === "tv" ? "📺" : "🎬"}</td>
+                                <td className="content-type">{item.type === "TV" ? "📺" : "🎬"}</td>
                                 <td className="rank-buttons">
                                     <button className={starCssClass(item.rank, 1)} onClick={(e) => {update(item._id, "rank", 1)}}>⭑</button>
                                     <button className={starCssClass(item.rank, 2)} onClick={(e) => {update(item._id, "rank",  2)}}>⭑</button>
