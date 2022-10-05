@@ -30,6 +30,11 @@ td {
     padding-top: 10px;
 }
 
+.table-title-row{
+    font-size: small;
+    color: var(--box-color)
+}
+
 a {
     color: var(--text-color)
 }
@@ -173,7 +178,7 @@ footer a {
 }
 
 a:hover {
-    text-decoration: underline overline;
+    text-decoration: underline;
 }
 
 .user-area {

@@ -27,6 +27,16 @@ export default function List({ items, setItems, loadItems}) {
         return (
             <div className="List">
                 <table>
+                    <thead>
+                        <tr className="table-title-row">
+                            <td></td>
+                            <td>Title ↑</td>
+                            <td>Type ↓</td>
+                            <td>Rank ↓</td>
+                            <td></td>
+                        </tr>
+                        
+                    </thead>
                     <tfoot>
                         {items.map((item, idx) => {
                         return (
