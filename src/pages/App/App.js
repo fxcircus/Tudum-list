@@ -23,7 +23,6 @@ export default function App() {
         loadItems()
     }, [])
 
-    // Uncomment this to redirect to login automatically
     useEffect(() => {
       if (!isAuthenticated) {
     loginWithRedirect()
@@ -52,10 +51,7 @@ export default function App() {
             </div>
         ) : (
             <div className="homepage">
-                {/* <div>
-                    <button onClick={() => logout()}>Click to logout</button>
-                </div> */}
-                <button onClick={() => loginWithRedirect()}>Click me to login</button>
+                <button onClick={() => loginWithRedirect()}>Redirecting to login page...</button>
             </div>
         )}
         </div>

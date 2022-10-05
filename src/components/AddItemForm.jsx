@@ -45,7 +45,6 @@ export default function AddItemList ({ loadItems }) {
                     <option value="tv">📺</option>
                     <option value="movie">🎬</option>
                 </select>
-            
         </form>  
     )
 }
