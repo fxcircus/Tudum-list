@@ -6,7 +6,7 @@ import { sortItemsArr } from "../utiliies/sorting/sortData"
 
 export default function List({ items, setItems, loadItems}) {
     const [ render, setRender ] = useState(false)
-    const [ titleCol, setTitleCol] = useState("↑")
+    const [ titleCol, setTitleCol] = useState("↓")
     const [ typeCol, setTypeCol] = useState("↓")
     const [ rankCol, setRankCol] = useState("↓")
 
@@ -27,8 +27,9 @@ export default function List({ items, setItems, loadItems}) {
         setRender(!render)
     }
 
-    const changeSortOrder = (col) => {
-        console.log(`clicked sort from ${col}`)
+    const changeSortOrder = (col, arrow, arrowChangeFunc) => {
+        console.log(`clicked sort from ${col}, arrow is ${arrow}`)
+        arrow === "↓" ? arrowChangeFunc("↑") : arrowChangeFunc("↓")
     }
 
     const loaded = () => {
@@ -38,9 +39,9 @@ export default function List({ items, setItems, loadItems}) {
                     <thead>
                         <tr className="table-title-row">
                             <td></td>
-                            <td><button className="sort-button" onClick={(e) => {changeSortOrder('title')}}>Title {titleCol}</button></td>
-                            <td><botton className="sort-button" onClick={(e) => {changeSortOrder('type')}}>Type {typeCol}</botton></td>
-                            <td><button className="sort-button" onClick={(e) => {changeSortOrder('rank')}}>Rank {rankCol}</button></td>
+                            <td><button className="sort-button" onClick={(e) => {changeSortOrder('title', titleCol, setTitleCol)}}>Title {titleCol}</button></td>
+                            <td><botton className="sort-button" onClick={(e) => {changeSortOrder('type', typeCol, setTypeCol)}}>Type {typeCol}</botton></td>
+                            <td><button className="sort-button" onClick={(e) => {changeSortOrder('rank', rankCol, setRankCol)}}>Rank {rankCol}</button></td>
                             <td></td>
                         </tr>
                         
