@@ -50,10 +50,9 @@ const moveCheckedItemsToEnd = (arr) => {
     arr.push(tmp)
     drag++
   }
-
 }
 
-/* arr is sorted after selectionSort ==> set rowNum to val of index */
+// arr is sorted after selectionSort ==> set rowNum to val of index
 const setRowNum = (arr) => {
   arr.forEach((item, idx) => {
     item.rowNum = idx
@@ -66,4 +65,13 @@ moveCheckedItemsToEnd(arr)
 setRowNum(arr)
 console.log(arr) 
 
-/*
+/* Result:
+{title:"deadwood", rowNum: 0, isChecked: false},
+{title:"I think you should leave", rowNum: 1, isChecked: false},
+{title:"Kobra Kai", rowNum: 2, isChecked: false},
+{title:"pastor stu", rowNum: 3, isChecked: false},
+{title:"Pleasantville", rowNum: 4, isChecked: false}]
+{title:"She Hulk", rowNum: 5, isChecked: false},
+{title:"birdbox", rowNum: 6, isChecked: true},
+{title:"The witcher", rowNum: 7, isChecked: true},
+*/
