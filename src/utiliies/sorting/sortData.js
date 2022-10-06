@@ -1,9 +1,20 @@
-// set rowNum val to char code of 1st letter (lowercase)
+// title column - set rowNum val to char code of 1st letter (lowercase)
 const rowNumFromStr = (arr) => {
   arr.forEach(s => {
   const c = s.title[0].toLowerCase().charCodeAt(0)
   s.rowNum = c
   })
+}
+
+const rowNumFromRank = (arr, direction) => {
+  arr.forEach(i => {
+    if(i.isChecked) {
+      i.rowNum = 6
+    } else {
+      i.rowNum = direction ? i.rank : 5 - i.rank
+    }
+  })
+  return arr
 }
 
 const selectionSortAsc = (arr) => {
@@ -70,9 +81,16 @@ const setRowNum = (arr) => {
 }
 
 export function sortItemsArr(arr, column = "title", order = "↓") {
-  if (column === "title") rowNumFromStr(arr)
-  order === "↓" ? selectionSortAsc(arr) : selectionSortDsc(arr)
-  moveCheckedItemsToEnd(arr)
-  setRowNum(arr)
+  if (column === "title") {
+    rowNumFromStr(arr)
+    order === "↓" ? selectionSortAsc(arr) : selectionSortDsc(arr)
+    moveCheckedItemsToEnd(arr)
+    setRowNum(arr)
+  } else if (column === "rank") {
+    order === "↓" ? rowNumFromRank(arr, true) : rowNumFromRank(arr, false)
+  } else {
+
+  }
+  
   return arr
 }

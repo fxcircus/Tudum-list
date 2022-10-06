@@ -30,7 +30,7 @@ export default function List({ items, setItems, loadItems}) {
     const updateAll = async () => {
         for (const i of items) {
             const updatedItem = await updateItem(i._id, i)
-            console.log(updateItem)
+            // console.log(updateItem)
         }
         loadItems()
         setRender(!render)
@@ -49,6 +49,8 @@ export default function List({ items, setItems, loadItems}) {
         tmpArr[idx].isChecked = !tmpArr[idx].isChecked
         setItems(tmpArr)
         changeSortOrder()
+        setRender(!render)
+
     }
 
     const loaded = () => {
