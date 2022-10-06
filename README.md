@@ -14,7 +14,7 @@ Clicking on a the title then opens it in a new tab (if it existed on any streami
 - Netflix-inspired design and color scheme
 
 ## Links
-- [Live version on Heroku](https://mern-music-maker.herokuapp.com/)
+- [Live version on Heroku](https://tudumlist.herokuapp.com/)
 - [Tello project board](https://trello.com/b/medFA55I/tudum-list-netflix-themed-react-to-do-app)
 
 ![screenshot](/public/screenshot.png)
