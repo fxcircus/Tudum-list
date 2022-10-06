@@ -48,7 +48,7 @@ export default function List({ items, setItems, loadItems}) {
         setItems(tmpArr)
         setTimeout(() => {
             changeSortOrder()
-        }, 1000)
+        }, 200)
     }
 
     const loaded = () => {

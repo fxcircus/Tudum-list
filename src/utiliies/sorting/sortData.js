@@ -1,20 +1,8 @@
-// title column - set rowNum val to char code of 1st letter (lowercase)
 const rowNumFromStr = (arr) => {
   arr.forEach(s => {
-  const c = s.title[0].toLowerCase().charCodeAt(0)
+  const c = s.title[0].toLowerCase().charCodeAt(0) // char code of 1st letter (lowercase)
   s.rowNum = c
   })
-}
-
-const rowNumFromRank = (arr, direction) => {
-  arr.forEach(i => {
-    if(i.isChecked) {
-      i.rowNum = 6
-    } else {
-      i.rowNum = direction ? i.rank : 5 - i.rank
-    }
-  })
-  return arr
 }
 
 const selectionSortAsc = (arr) => {
@@ -55,12 +43,22 @@ const selectionSortDsc = (arr) => {
   return arr
 }
 
-// Move items where isChecked val is "true" to end of list
+const rowNumFromRank = (arr, direction) => {
+  arr.forEach(i => {
+    if(i.isChecked) {
+      i.rowNum = 6
+    } else {
+      i.rowNum = direction ? i.rank : 5 - i.rank
+    }
+  })
+  return arr
+}
+
 const moveCheckedItemsToEnd = (arr) => {
   const itemsToMove = []
   arr.forEach((item, idx) => {
     if (item.isChecked) {
-      itemsToMove.push(idx)
+      itemsToMove.push(idx) // Move items where isChecked val is "true" to end of list
     }
   })
   let drag = 0
@@ -73,7 +71,6 @@ const moveCheckedItemsToEnd = (arr) => {
   }
 }
 
-// arr is sorted after selectionSort ==> set rowNum to val of index
 const setRowNum = (arr) => {
   arr.forEach((item, idx) => {
     item.rowNum = idx
@@ -86,12 +83,11 @@ export function sortItemsArr(arr, column = "title", order = "↓") {
     rowNumFromStr(arr)
     order === "↓" ? selectionSortAsc(arr) : selectionSortDsc(arr)
     moveCheckedItemsToEnd(arr)
-    setRowNum(arr)
+    setRowNum(arr) // string values are sorted ==> set rowNum to val of index
   } else if (column === "rank") {
     order === "↓" ? rowNumFromRank(arr, true) : rowNumFromRank(arr, false)
   } else {
-
+    // tv, movie sort
   }
-  
   return arr
 }
