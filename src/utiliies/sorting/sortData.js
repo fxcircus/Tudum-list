@@ -81,6 +81,7 @@ const setRowNum = (arr) => {
 }
 
 export function sortItemsArr(arr, column = "title", order = "↓") {
+  console.log(column, order)
   if (column === "title") {
     rowNumFromStr(arr)
     order === "↓" ? selectionSortAsc(arr) : selectionSortDsc(arr)

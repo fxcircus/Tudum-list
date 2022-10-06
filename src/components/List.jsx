@@ -24,19 +24,17 @@ export default function List({ items, setItems, loadItems}) {
         keyValPair[key] = val
         const updatedItem = await updateItem(itemId, keyValPair)
         loadItems()
-        setRender(!render)
     }
 
     const updateAll = async () => {
         for (const i of items) {
             const updatedItem = await updateItem(i._id, i)
-            // console.log(updateItem)
         }
-        loadItems()
+        await loadItems()
         setRender(!render)
     }
 
-    const changeSortOrder = (col = "title", arrow = null, arrowChangeFunc = setTitleCol) => {
+    const changeSortOrder = (col = "title", arrow, arrowChangeFunc = setTitleCol) => {
         if (arrow) arrow === "↓" ? arrowChangeFunc("↑") : arrowChangeFunc("↓")
         const tmpArr = items.slice()
         sortItemsArr(tmpArr, col, arrow)
@@ -48,9 +46,9 @@ export default function List({ items, setItems, loadItems}) {
         const tmpArr = items.slice()
         tmpArr[idx].isChecked = !tmpArr[idx].isChecked
         setItems(tmpArr)
-        changeSortOrder()
-        setRender(!render)
-
+        setTimeout(() => {
+            changeSortOrder()
+        }, 1000)
     }
 
     const loaded = () => {
