@@ -36,7 +36,7 @@ td {
     color: var(--box-color)
 }
 
-.sort-button:hover, .content-type:hover, .delete-button:hover {
+.sort-button:hover, .content-type:hover, .delete-button:hover, .profile-image, .logout-btn {
     cursor: pointer;
 }
 

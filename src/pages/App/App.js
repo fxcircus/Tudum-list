@@ -3,7 +3,7 @@ import Foooter from "../../components/Footer"
 import { useState, useEffect } from "react"
 import { getItems } from "../../utiliies/api/items-api"
 import { ContextHolder } from '@frontegg/rest-api'
-import { useAuth, useLoginWithRedirect } from "@frontegg/react"
+import { useAuth, useLoginWithRedirect, AdminPortal } from "@frontegg/react"
 
 export default function App() {
     const [ items, setItems ] = useState(null)
@@ -40,9 +40,9 @@ export default function App() {
             <div className="homepage">
                 <div className="user-area">
                     <p>
-                    <img src={user?.profilePictureUrl} alt={user?.name}/>
+                    <img src={user?.profilePictureUrl} alt={user?.name} onClick={() => {AdminPortal.show()}} className="profile-image"/>
                     </p>
-                    <button onClick={() => logout()}>Logout</button>
+                    <button className ="logout-btn" onClick={() => logout()}>Logout</button>
                 </div>
                 <img className="tudumlist-logo" src={"/tudumlist_icon_transperent.png"}/>
                 <h3>{user?.name}'s Cross-platform watch list</h3>
