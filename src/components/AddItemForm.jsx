@@ -11,6 +11,7 @@ export default function AddItemList ({ loadItems }) {
         type: "tv",
         url: ""
     })
+    const [ modalOpen, setModalOpen ] = useState (false)
 
     const getUrl = async (lastEvt) => {
         const currText = lastEvt.target.value
@@ -45,6 +46,8 @@ export default function AddItemList ({ loadItems }) {
                     <option value="tv">📺</option>
                     <option value="movie">🎬</option>
                 </select>
+
+                <div className="search-modal" display={modalOpen ? "block" : "none"}></div>
         </form>  
     )
 }
