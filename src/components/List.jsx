@@ -59,7 +59,7 @@ export default function List({ items, setItems, loadItems}) {
                         <tr className="table-title-row">
                             <td></td>
                             <td><button className="sort-button" onClick={(e) => {changeSortOrder('title', titleCol, setTitleCol)}}>Title {titleCol}</button></td>
-                            <td><button className="sort-button" onClick={(e) => {changeSortOrder('type', typeCol, setTypeCol)}}>Type {typeCol}</button></td>
+                            {/* <td><button className="sort-button" onClick={(e) => {changeSortOrder('type', typeCol, setTypeCol)}}>Type {typeCol}</button></td> */}
                             <td><button className="sort-button" onClick={(e) => {changeSortOrder('rank', rankCol, setRankCol)}}>Rank {rankCol}</button></td>
                             <td></td>
                         </tr>
@@ -81,7 +81,7 @@ export default function List({ items, setItems, loadItems}) {
                                         {item.isChecked ? <del>{item.title}</del> : item.title}
                                     </a>
                                 </td> 
-                                <td className="content-type">{item.type === "TV" ? "📺" : "🎬"}</td>
+                                {/* <td className="content-type">{item.type === "TV" ? "📺" : "🎬"}</td> */}
                                 <td className="rank-buttons">
                                     <button className={starCssClass(item.rank, 1)} onClick={(e) => {updateOne(item._id, "rank", 1)}}>⭑</button>
                                     <button className={starCssClass(item.rank, 2)} onClick={(e) => {updateOne(item._id, "rank",  2)}}>⭑</button>

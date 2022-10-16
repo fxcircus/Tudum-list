@@ -4,5 +4,5 @@ const BASE_URL = `https://customsearch.googleapis.com/customsearch/v1?cx=e60ce9e
 
 export async function googleTitle (titleName) {
     const res = await sendRequest (`${BASE_URL}&q=${titleName}`)
-    return res.items[0].link
+    return res.items[0]
 }

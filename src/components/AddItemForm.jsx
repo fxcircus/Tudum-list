@@ -12,24 +12,35 @@ export default function AddItemList ({ loadItems }) {
         url: ""
     })
     const [ modalOpen, setModalOpen ] = useState (false)
-
+    const [ img, setImg ] = useState ("")
+    const [ icon, setIcon ] = useState("🔎")
     const getUrl = async (lastEvt) => {
-        const currText = lastEvt.target.value
-        let resTxt = await googleTitle(currText)
-        const newObj = { url: resTxt}
+        setIcon("🌐")
+        let res = await googleTitle(lastEvt)
+        setImg(res.pagemap.cse_image[0].src)
+        const newObj = { url: res.link}
         setFormData(formData => ({...formData, ...newObj}))
+        setModalOpen(true)
+        setIcon("✔️")
+        setTimeout(() => {
+            setIcon("🔎") 
+        }, 2000);
     }
 
     const handleChange = (event) => {
-        getUrl(event)
         setFormData({...formData, [event.target.name]: event.target.value})
+    }
+
+    const runSearch = () => {
+        getUrl(formData.title)
     }
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-        await createItem (formData)
+        // await createItem (formData)
+        setModalOpen(false)
         setFormData({ title: "" })
-        loadItems()
+        // loadItems()
     }
 
     return (
@@ -42,12 +53,20 @@ export default function AddItemList ({ loadItems }) {
                 value={formData.title}
                 onChange={handleChange}
             />
-                <select className="type-select" name="type" id="type" onChange={handleChange}>
-                    <option value="tv">📺</option>
-                    <option value="movie">🎬</option>
-                </select>
 
-                <div className="search-modal" display={modalOpen ? "block" : "none"}></div>
+            <button type="button" onClick={(e) => {runSearch()}}>{icon}</button>
+
+            {/* <select className="type-select" name="type" id="type" onChange={handleChange}>
+                <option value="tv">📺</option>
+                <option value="movie">🎬</option>
+            </select> */}
+
+            {modalOpen ? (
+                <div className="search-modal">
+                    <img className="thumbnail" src={img} alt="thumbnail" />
+                </div>
+            ) :
+            ("")}
         </form>  
     )
 }
