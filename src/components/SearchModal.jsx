@@ -14,6 +14,7 @@ export default function SearchModal ({ loadItems }) {
     const [ modalOpen, setModalOpen ] = useState (false)
     const [ img, setImg ] = useState ("")
     const [ icon, setIcon ] = useState("🔎")
+
     const getUrl = async (lastEvt) => {
         setIcon("🌐")
         let res = await googleTitle(lastEvt)
@@ -39,6 +40,10 @@ export default function SearchModal ({ loadItems }) {
         setModalOpen(false)
         setFormData({ title: "" })
         setImg("")
+    }
+
+    const openModal = () => {
+        setModalOpen(true)
     }
 
     const handleSubmit = async (event) => {
@@ -68,6 +73,7 @@ export default function SearchModal ({ loadItems }) {
                         placeholder="List item"
                         value={formData.title}
                         onChange={handleChange}
+                        autoFocus
                     />
 
                     <button type="button" onClick={(e) => {runSearch()}}>{icon}</button>
@@ -90,7 +96,7 @@ export default function SearchModal ({ loadItems }) {
             ) : (
             <button
                 className="modal-open-button"
-                onClick={(e) => {setModalOpen(true)}}
+                onClick={(e) => {openModal()}}
                 >Add+</button>
             )} 
         </div> 

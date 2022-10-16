@@ -24,7 +24,7 @@ html {
     border-radius: 5px;
     box-shadow: 0px 1px 9px var(--box-color);
     padding-left: 5px;
-    overflow:scroll;
+    overflow: auto;
     max-height: 500px;
 }
 
@@ -221,7 +221,6 @@ a:hover {
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    text-shadow: 0px 1px 9px var(--box-color);
 }
 
 .modal-content {
@@ -229,9 +228,9 @@ a:hover {
     margin: auto;
     padding: 30px;
     border: 1px solid #888;
-    width: 50%;
+    width: 30%;
     border-radius: 5px;
-    transition: opacity 5.3s;
+    box-shadow: 0px 1px 6px var(--box-color);
 }
 
 .search-modal {
