@@ -1,5 +1,6 @@
 import List from "../../components/List"
 import Foooter from "../../components/Footer"
+import SearchModal from "../../components/SearchModal"
 import { useState, useEffect } from "react"
 import { getItems } from "../../utiliies/api/items-api"
 import { ContextHolder } from '@frontegg/rest-api'
@@ -47,6 +48,7 @@ export default function App() {
                 <img className="tudumlist-logo" src={"/tudumlist_icon_transperent.png"}/>
                 <h3>{user?.name}'s Cross-platform watch list</h3>
                 <List items={items} setItems={setItems} loadItems={loadItems} />
+                <SearchModal loadItems={loadItems}/>
                 <Foooter />
             </div>
         ) : (

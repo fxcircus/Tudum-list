@@ -95,8 +95,8 @@ export default function List({ items, setItems, loadItems}) {
                     })}
                     </tfoot>
                 </table>
-                <AddItemList loadItems={loadItems} />
-                <div className="gcse-search"></div> 
+                {/* <AddItemList loadItems={loadItems} /> */}
+                
             </div>
         )
     }
