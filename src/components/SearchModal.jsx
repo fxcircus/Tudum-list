@@ -35,6 +35,12 @@ export default function SearchModal ({ loadItems }) {
         getUrl(formData.title)
     }
 
+    const closeModal = () => {
+        setModalOpen(false)
+        setFormData({ title: "" })
+        setImg("")
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault()
         // await createItem (formData)
@@ -52,8 +58,32 @@ export default function SearchModal ({ loadItems }) {
                 >
             
               <div class="modal-content">
-                <button class="close" onClick={(e) => {setModalOpen(false)}}>&times;</button>
-                <p>Some text in the Modal..</p>
+                <button type="button"
+                        className="modal-close-button"
+                        onClick={(e) => {closeModal()}}>&times;</button>
+                <form className="add-new-item-div" onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        name="title"
+                        placeholder="List item"
+                        value={formData.title}
+                        onChange={handleChange}
+                    />
+
+                    <button type="button" onClick={(e) => {runSearch()}}>{icon}</button>
+
+                    {/* <select className="type-select" name="type" id="type" onChange={handleChange}>
+                        <option value="tv">📺</option>
+                        <option value="movie">🎬</option>
+                    </select> */}
+
+                    {img ? (
+                        <div className="search-modal">
+                            <img className="thumbnail" src={img} alt="thumbnail" />
+                        </div>
+                    ) :
+                    ("")}
+                </form>
               </div>
             
             </div>
