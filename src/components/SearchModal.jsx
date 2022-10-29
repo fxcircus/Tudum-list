@@ -14,6 +14,8 @@ export default function SearchModal ({ loadItems }) {
     const [ modalOpen, setModalOpen ] = useState (false)
     const [ img, setImg ] = useState ("")
     const [ icon, setIcon ] = useState("🔎")
+    const [ inputValue, setInputValue ] = useState ("")
+    const [ timer, setTimer ] = useState (null)
 
     const getUrl = async (lastEvt) => {
         setIcon("🌐")
@@ -28,13 +30,25 @@ export default function SearchModal ({ loadItems }) {
         }, 2000);
     }
 
+    const endTimer = () => {
+        console.log("1 second passed, running search!")
+        getUrl()
+    }
+
+    const checkTimeout = (inputValue) => {
+        if (timer) {
+            console.log('reseting timer')
+            clearTimeout(timer)
+            setTimer(setTimeout( endTimer, 1000 ))
+        }
+        else {
+            setTimer(setTimeout( endTimer, 1000 )) // First run (timer is empty str === null)
+        }
+      }
+
     const handleChange = (event) => {
         setFormData({...formData, [event.target.name]: event.target.value})
-        console.log(event.target.value, typeof(event.target.value))
-        if(event.target.value.length > 4) {
-            console.log("greater than 6 chars, running search")
-            getUrl(event.target.value)
-        }
+        checkTimeout(event.target.value)
     }
 
     const runSearch = () => {
