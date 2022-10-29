@@ -21,7 +21,7 @@ export default function SearchModal ({ loadItems }) {
         setImg(res.pagemap.cse_image[0].src)
         const newObj = { url: res.link}
         setFormData(formData => ({...formData, ...newObj}))
-        setModalOpen(true)
+        // setModalOpen(true)
         setIcon("✔️")
         setTimeout(() => {
             setIcon("🔎") 
@@ -30,6 +30,11 @@ export default function SearchModal ({ loadItems }) {
 
     const handleChange = (event) => {
         setFormData({...formData, [event.target.name]: event.target.value})
+        console.log(event.target.value, typeof(event.target.value))
+        if(event.target.value.length > 6) {
+            console.log("greater than 6 chars, running search")
+            getUrl(event.target.value)
+        }
     }
 
     const runSearch = () => {
