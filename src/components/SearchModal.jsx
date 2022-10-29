@@ -53,10 +53,10 @@ export default function SearchModal ({ loadItems }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-        // await createItem (formData)
+        await createItem (formData)
         setModalOpen(false)
         setFormData({ title: "" })
-        // loadItems()
+        loadItems()
     }
 
     return (

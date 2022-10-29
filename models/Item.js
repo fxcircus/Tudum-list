@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 
 const itemSchema = new Schema ({
     title: { type: String, required: true, trim: true},
-    type: { type: String, required: "TV" },
+    type: { type: String, default: "TV" },
     isChecked: { type: Boolean, required: false, default: false },
     url: String,
     rowNum: { type: Number, required: false, default: 0 },
