@@ -31,7 +31,7 @@ export default function SearchModal ({ loadItems }) {
     const handleChange = (event) => {
         setFormData({...formData, [event.target.name]: event.target.value})
         console.log(event.target.value, typeof(event.target.value))
-        if(event.target.value.length > 6) {
+        if(event.target.value.length > 4) {
             console.log("greater than 6 chars, running search")
             getUrl(event.target.value)
         }
