@@ -32,7 +32,7 @@ export default function SearchModal ({ loadItems }) {
 
     const endTimer = () => {
         console.log("1 second passed, running search!")
-        getUrl()
+        getUrl(formData.title)
     }
 
     const checkTimeout = (inputValue) => {
