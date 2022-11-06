@@ -8,7 +8,8 @@ import { useAuth, useLoginWithRedirect, AdminPortal } from "@frontegg/react"
 
 export default function App() {
     const [ items, setItems ] = useState(null)
-    const { user, isAuthenticated } = useAuth()
+    // const { user, isAuthenticated } = useAuth()
+    const [ isAuthenticated, setIsAuthenticated ] = useState(1) // bypass frontEgg
     const loginWithRedirect = useLoginWithRedirect()
 
     const loadItems = async () => {
@@ -41,12 +42,12 @@ export default function App() {
             <div className="homepage">
                 <div className="user-area">
                     <p>
-                    <img src={user?.profilePictureUrl} alt={user?.name} onClick={() => {AdminPortal.show()}} className="profile-image"/>
+                    {/* <img src={user?.profilePictureUrl} alt={user?.name} onClick={() => {AdminPortal.show()}} className="profile-image"/> bypass frontEgg */}
                     </p>
                     <button className ="logout-btn" onClick={() => logout()}>Logout</button>
                 </div>
                 <img className="tudumlist-logo" src={"/tudumlist_icon_transperent.png"}/>
-                <h3>{user?.name}'s Cross-platform watch list</h3>
+                {/* <h3>{user?.name}'s Cross-platform watch list</h3> bypass frontEgg */}
                 <List items={items} setItems={setItems} loadItems={loadItems} />
                 <SearchModal loadItems={loadItems}/>
                 <Foooter />
