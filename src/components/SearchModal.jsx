@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { createItem } from "../utiliies/api/items-api"
 import { googleTitle } from "../utiliies/api/google-search-api"
+import { set_platform } from '../utiliies/format_data'
 
 export default function SearchModal ({ loadItems }) {
     const [ formData, setFormData ] = useState ({
@@ -16,13 +17,15 @@ export default function SearchModal ({ loadItems }) {
     const [ icon, setIcon ] = useState("🔎")
     const [ inputValue, setInputValue ] = useState ("")
     const [ timer, setTimer ] = useState (null)
+    const [ platform, setPlatform ] = useState ("")
 
     const getUrl = async (lastEvt) => {
         setIcon("🌐")
         let res = await googleTitle(lastEvt)
         setImg(res.pagemap.cse_image[0].src)
-        const newObj = { url: res.link}
-        setFormData(formData => ({...formData, ...newObj}))
+        const newUrl = { url: res.link}
+        setPlatform(res.title)
+        setFormData(formData => ({...formData, ...newUrl}))
         // setModalOpen(true)
         setIcon("✔️")
         setTimeout(() => {
@@ -105,6 +108,7 @@ export default function SearchModal ({ loadItems }) {
                     {img ? (
                         <div className="search-modal">
                             <img className="thumbnail" src={img} alt="thumbnail" />
+                            <p>{platform}</p>
                         </div>
                     ) :
                     ("")}
