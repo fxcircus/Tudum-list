@@ -197,8 +197,8 @@ export default function SearchModal ({ loadItems }) {
                 
                 {img ? (
                     <div className="returned-results">
-                        <img className="thumbnail" src={img} alt="thumbnail" />
                         <p>{returnedTitle}</p>
+                        <img className="thumbnail" src={img} alt="thumbnail" />
                     </div>
                 ) :
                 ("")}

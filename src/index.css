@@ -237,9 +237,9 @@ a:hover {
     font-size: x-large;
 }
 
-.returned-results {
-    height: 100px;
-    width: 100px;
+.thumbnail {
+    max-height: 109px;
+    max-width: 192px;
 }
 
 .modal-open-button {
@@ -260,6 +260,13 @@ a:hover {
 .modal-close-button:hover {
     cursor: pointer;
     color: var(--text-color);
+}
+
+.returned-results {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 15px;
 }
 
 .thumbnail {
