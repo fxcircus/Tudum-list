@@ -30,9 +30,10 @@ export default function SearchModal ({ loadItems }) {
     })
     const [ searchFilter, setSearchFilter ] = useState("&siteSearch=www.netflix.com&siteSearch=www.hulu.com&siteSearch=www.peacock.com&siteSearch=www.amazon.com&siteSearch=www.hbomax.com&siteSearch=www.disneyplus.com&siteSearch=www.tv.apple.com")
 
-    const getUrl = async (lastEvt) => {
+    const getUrl = async (title) => {
         setIcon("🌐")
-        let res = await googleTitle(lastEvt)
+        const finalSearchTerm = title + searchFilter
+        let res = await googleTitle(title)
         setImg(res.pagemap.cse_image[0].src)
         const newUrl = { url: res.link}
         setPlatform(res.title)
@@ -87,19 +88,35 @@ export default function SearchModal ({ loadItems }) {
         loadItems()
     }
 
-    const changeSearchFilters = (val) => {
+    const switchSearchFilters = (val) => {
         const newBoolVal = !platformList[val] 
-        let tmpCurFilter = searchFilter
-        const newFilter = val === "apple" ? `&siteSearch=www.tv.apple.com` : `&siteSearch=www.${val}.com`
-        if(newBoolVal) {
-            tmpCurFilter += newFilter
-        } else {
-            tmpCurFilter = tmpCurFilter.replace(newFilter, '')
+        if (val === 'all' && newBoolVal) {
+            const allTrue = {all: true, netflix: true, hulu: true, apple: true, peacock: true, amazon: true, hbomax: true, disneyplus: true}
+            setPlatformList({...platformList, ...allTrue})
+        } else if (val === 'all' && !newBoolVal){
+            const allFalse = {all: false, netflix: false, hulu: false, apple: false, peacock: false, amazon: false, hbomax: false, disneyplus: false}
+            setPlatformList({...platformList, ...allFalse})
+        }else {
+            setPlatformList({...platformList, all: false})
+            setPlatformList({...platformList, [val]: newBoolVal})
         }
+        buildSearchFilter()
+    }
 
-        setSearchFilter(tmpCurFilter)
+    const buildSearchFilter = () => {
+        let newFilter = ""
+        if (platformList.all === false) {
+            if (platformList.netflix) newFilter += `&siteSearch=www.netflix.com`
+            if (platformList.hulu) newFilter += `&siteSearch=www.hulu.com`
+            if (platformList.apple) newFilter += `&siteSearch=www.tv.apple.com`
+            if (platformList.peacock) newFilter += `&siteSearch=www.peacock.com`
+            if (platformList.amazon) newFilter += `&siteSearch=www.amazon.com`
+            if (platformList.hbomax) newFilter += `&siteSearch=www.hbomax.com`
+            if (platformList.disneyplus) newFilter += `&siteSearch=www.disneyplus.com`
+            newFilter += '&siteSearchFilter=e'
+        }
+        setSearchFilter(newFilter)
         console.log(searchFilter)
-        setPlatformList({...platformList, [val]: newBoolVal})
     }
 
     return (
@@ -140,36 +157,36 @@ export default function SearchModal ({ loadItems }) {
                     <span>Search on: </span>
                     <label className="platform-label">
                         <input type="checkbox" checked={platformList.all ? "checked": null}
-                        onChange={(e) => {changeSearchFilters("all")}} />All
+                        onChange={(e) => {switchSearchFilters("all")}} />All
                     </label>
                     <label className="platform-label">
                         <input type="checkbox" checked={platformList.netflix ? "checked": null}
-                        onChange={(e) => {changeSearchFilters("netflix")}} />Netflix
+                        onChange={(e) => {switchSearchFilters("netflix")}} />Netflix
                     </label>
                     <label className="platform-label">
                         <input type="checkbox" checked={platformList.hulu ? "checked": null}
-                        onChange={(e) => {changeSearchFilters("hulu")}} />Hulu
+                        onChange={(e) => {switchSearchFilters("hulu")}} />Hulu
                         <span className="checkmark"></span>
                     </label>
                     <label className="platform-label">
                         <input type="checkbox" checked={platformList.apple ? "checked": null}
-                        onChange={(e) => {changeSearchFilters("apple")}} />Apple TV+
+                        onChange={(e) => {switchSearchFilters("apple")}} />Apple TV+
                     </label>
                     <label className="platform-label">
                         <input type="checkbox" checked={platformList.peacock ? "checked": null}
-                        onChange={(e) => {changeSearchFilters("peacock")}} />Peacock
+                        onChange={(e) => {switchSearchFilters("peacock")}} />Peacock
                     </label>
                     <label className="platform-label">
                         <input type="checkbox" checked={platformList.amazon ? "checked": null}
-                        onChange={(e) => {changeSearchFilters("amazon")}} />Amazon Prime
+                        onChange={(e) => {switchSearchFilters("amazon")}} />Amazon Prime
                     </label>
                     <label className="platform-label">
                         <input type="checkbox" checked={platformList.hbomax ? "checked": null}
-                        onChange={(e) => {changeSearchFilters("hbomax")}} />HBO Max
+                        onChange={(e) => {switchSearchFilters("hbomax")}} />HBO Max
                     </label>
                     <label className="platform-label">
                         <input type="checkbox"checked={platformList.disneyplus ? "checked": null}
-                        onChange={(e) => {changeSearchFilters("disneyplus")}} />Disney
+                        onChange={(e) => {switchSearchFilters("disneyplus")}} />Disney
                     </label>
                 </div>
                 
