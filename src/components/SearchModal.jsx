@@ -4,6 +4,7 @@ import { googleTitle } from "../utiliies/api/google-search-api"
 import { set_platform } from '../utiliies/format_data'
 
 export default function SearchModal ({ loadItems }) {
+    const [ render, setRender ] = useState(false)
     const [ formData, setFormData ] = useState ({
         title : "",
         isChecked: false,
@@ -15,9 +16,8 @@ export default function SearchModal ({ loadItems }) {
     const [ modalOpen, setModalOpen ] = useState (true)
     const [ img, setImg ] = useState ("")
     const [ icon, setIcon ] = useState("🔎")
-    const [ inputValue, setInputValue ] = useState ("")
     const [ timer, setTimer ] = useState (null)
-    const [ platform, setPlatform ] = useState ("")
+    const [ returnedTitle, setReturnedTitle ] = useState ("")
     const [ platformList, setPlatformList ] = useState ({
         all: true,
         netflix: true,
@@ -33,10 +33,10 @@ export default function SearchModal ({ loadItems }) {
     const getUrl = async (title) => {
         setIcon("🌐")
         const finalSearchTerm = title + searchFilter
-        let res = await googleTitle(title)
+        let res = await googleTitle(finalSearchTerm)
         setImg(res.pagemap.cse_image[0].src)
         const newUrl = { url: res.link}
-        setPlatform(res.title)
+        setReturnedTitle(res.title)
         setFormData(formData => ({...formData, ...newUrl}))
         // setModalOpen(true)
         setIcon("✔️")
@@ -88,7 +88,7 @@ export default function SearchModal ({ loadItems }) {
         loadItems()
     }
 
-    const switchSearchFilters = (val) => {
+    const switchSearchFilters = async (val) => {
         const newBoolVal = !platformList[val] 
         if (val === 'all' && newBoolVal) {
             const allTrue = {all: true, netflix: true, hulu: true, apple: true, peacock: true, amazon: true, hbomax: true, disneyplus: true}
@@ -96,16 +96,22 @@ export default function SearchModal ({ loadItems }) {
         } else if (val === 'all' && !newBoolVal){
             const allFalse = {all: false, netflix: false, hulu: false, apple: false, peacock: false, amazon: false, hbomax: false, disneyplus: false}
             setPlatformList({...platformList, ...allFalse})
-        }else {
-            setPlatformList({...platformList, all: false})
-            setPlatformList({...platformList, [val]: newBoolVal})
+        } else if (val !== 'all') {
+            setPlatformList({...platformList, all: false, [val]: newBoolVal})
         }
-        buildSearchFilter()
+        setRender(!render)
+        const newFilter = await buildSearchFilter()
+        setSearchFilter(newFilter)
+        
     }
 
-    const buildSearchFilter = () => {
-        let newFilter = ""
-        if (platformList.all === false) {
+    const buildSearchFilter = async () => {
+        let newFilter
+        if (platformList.all) {
+            const allSites = "&siteSearch=www.netflix.com&siteSearch=www.hulu.com&siteSearch=www.peacock.com&siteSearch=www.amazon.com&siteSearch=www.hbomax.com&siteSearch=www.disneyplus.com&siteSearch=www.tv.apple.com"
+            newFilter = allSites
+        } else {
+            newFilter = ""
             if (platformList.netflix) newFilter += `&siteSearch=www.netflix.com`
             if (platformList.hulu) newFilter += `&siteSearch=www.hulu.com`
             if (platformList.apple) newFilter += `&siteSearch=www.tv.apple.com`
@@ -113,10 +119,9 @@ export default function SearchModal ({ loadItems }) {
             if (platformList.amazon) newFilter += `&siteSearch=www.amazon.com`
             if (platformList.hbomax) newFilter += `&siteSearch=www.hbomax.com`
             if (platformList.disneyplus) newFilter += `&siteSearch=www.disneyplus.com`
-            newFilter += '&siteSearchFilter=e'
         }
-        setSearchFilter(newFilter)
-        console.log(searchFilter)
+        return newFilter ? newFilter += '&siteSearchFilter=i' : ""
+        // console.log(searchFilter)
     }
 
     return (
@@ -193,7 +198,7 @@ export default function SearchModal ({ loadItems }) {
                 {img ? (
                     <div className="returned-results">
                         <img className="thumbnail" src={img} alt="thumbnail" />
-                        <p>{platform}</p>
+                        <p>{returnedTitle}</p>
                     </div>
                 ) :
                 ("")}
