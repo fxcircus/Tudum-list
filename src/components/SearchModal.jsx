@@ -37,7 +37,10 @@ export default function SearchModal ({ loadItems }) {
         setImg(res.pagemap.cse_image[0].src)
         const newUrl = { url: res.link}
         setReturnedTitle(res.title)
-        setFormData(formData => ({...formData, ...newUrl}))
+        const regex = /^Watch\s([a-zA-Z0-9\s]+)\s.*\|/
+        const match = returnedTitle.match(regex)
+        console.log(match[1])
+        setFormData(formData => ({...formData, ...newUrl, title: match[1]}))
         // setModalOpen(true)
         setIcon("✔️")
         setTimeout(() => {
