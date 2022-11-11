@@ -38,7 +38,9 @@ export default function SearchModal ({ loadItems }) {
         const newUrl = { url: res.link}
         setReturnedTitle(res.title)
         const regex = /^Watch\s([a-zA-Z0-9\s]+)\s.*\|/
-        const match = returnedTitle.match(regex)
+        let match = returnedTitle.match(regex)
+        console.log(match)
+        match[1] = match[1].replace('Streaming Online', '')
         console.log(match[1])
         setFormData(formData => ({...formData, ...newUrl, title: match[1]}))
         // setModalOpen(true)
