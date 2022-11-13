@@ -28,21 +28,23 @@ export default function SearchModal ({ loadItems }) {
         hbomax: true,
         disneyplus: true
     })
-    const [ searchFilter, setSearchFilter ] = useState("&siteSearch=www.netflix.com&siteSearch=www.hulu.com&siteSearch=www.peacock.com&siteSearch=www.amazon.com&siteSearch=www.hbomax.com&siteSearch=www.disneyplus.com&siteSearch=www.tv.apple.com")
+    const fullFilter = "&siteSearch=www.netflix.com&siteSearch=www.hulu.com&siteSearch=www.peacock.com&siteSearch=www.amazon.com&siteSearch=www.hbomax.com&siteSearch=www.disneyplus.com&siteSearch=www.tv.apple.com"
+    const [ searchFilter, setSearchFilter ] = useState("")
+    const [ correctedTitle, setCorrectedTitle ] = useState(null)
 
     const getUrl = async (title) => {
         setIcon("🌐")
         const finalSearchTerm = title + searchFilter
         let res = await googleTitle(finalSearchTerm)
         setImg(res.pagemap.cse_image[0].src)
-        const newUrl = { url: res.link}
+        setFormData(formData => ({...formData, url: res.link}))
         setReturnedTitle(res.title)
-        const regex = /^Watch\s([a-zA-Z0-9\s]+)\s.*\|/
-        let match = returnedTitle.match(regex)
-        console.log(match)
-        match[1] = match[1].replace('Streaming Online', '')
-        console.log(match[1])
-        setFormData(formData => ({...formData, ...newUrl, title: match[1]}))
+        // const regex = /^Watch\s([a-zA-Z0-9\s:']+)\s|/
+        // let match = returnedTitle.match(regex)
+        // console.log(match)
+        // match[1] = match[1].replace('Streaming Online', '')
+        // console.log(match[1])
+        // setCorrectedTitle(match[1])
         // setModalOpen(true)
         setIcon("✔️")
         setTimeout(() => {
@@ -55,7 +57,7 @@ export default function SearchModal ({ loadItems }) {
         getUrl(formData.title)
     }
 
-    const checkTimeout = (inputValue) => {
+    const checkTimeout = () => {
         if (timer) {
             console.log('reseting timer')
             clearTimeout(timer)
@@ -87,6 +89,9 @@ export default function SearchModal ({ loadItems }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
+        if (correctedTitle) {
+            setFormData(formData => ({...formData, title: correctedTitle}))
+        }
         await createItem (formData)
         closeModal()
         setFormData({ title: "" })
