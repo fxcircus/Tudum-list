@@ -126,8 +126,12 @@ export default function SearchModal ({ loadItems }) {
         setSearchFilter(newFilter)
     }
 
+    const checkKeyPress = (e) => {
+        if(e.code === "Escape") closeModal()
+    }
+
     return (
-        <div>
+        <div onKeyDown={(e) => {checkKeyPress(e)}}>
             { modalOpen ? (
             
             <div className={fadeIn}
