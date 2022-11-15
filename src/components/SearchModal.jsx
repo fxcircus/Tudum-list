@@ -4,7 +4,6 @@ import { googleTitle } from "../utiliies/api/google-search-api"
 import { set_platform } from '../utiliies/format_data'
 
 export default function SearchModal ({ loadItems }) {
-    const [ render, setRender ] = useState(false)
     const [ formData, setFormData ] = useState ({
         title : "",
         isChecked: false,
@@ -13,22 +12,21 @@ export default function SearchModal ({ loadItems }) {
         type: "tv",
         url: ""
     })
-    const [ modalOpen, setModalOpen ] = useState (true)
+    const [ modalOpen, setModalOpen ] = useState (false)
     const [ img, setImg ] = useState ("")
     const [ icon, setIcon ] = useState("🔎")
     const [ timer, setTimer ] = useState (null)
     const [ returnedTitle, setReturnedTitle ] = useState ("")
     const [ platformList, setPlatformList ] = useState ({
-        all: true,
-        netflix: true,
-        hulu: true,
-        apple: true,
-        peacock: true,
-        amazon: true,
-        hbomax: true,
-        disneyplus: true
+        none:true,
+        netflix: false,
+        hulu: false,
+        apple: false,
+        peacock: false,
+        amazon: false,
+        hbomax: false,
+        disneyplus: false
     })
-    const fullFilter = "&siteSearch=www.netflix.com&siteSearch=www.hulu.com&siteSearch=www.peacock.com&siteSearch=www.amazon.com&siteSearch=www.hbomax.com&siteSearch=www.disneyplus.com&siteSearch=www.tv.apple.com"
     const [ searchFilter, setSearchFilter ] = useState("")
     const [ correctedTitle, setCorrectedTitle ] = useState(null)
 
@@ -98,46 +96,31 @@ export default function SearchModal ({ loadItems }) {
         loadItems()
     }
 
-    const switchSearchFilters = async (val) => {
-        const currVal = platformList[val]
-        const newBoolVal = !currVal        
-        if (val === 'all' && newBoolVal) {
-            const allTrue = {all: true, netflix: true, hulu: true, apple: true, peacock: true, amazon: true, hbomax: true, disneyplus: true}
-            setPlatformList({...platformList, ...allTrue})
-        } else if (val === 'all' && !newBoolVal){
-            const allFalse = {all: false, netflix: false, hulu: false, apple: false, peacock: false, amazon: false, hbomax: false, disneyplus: false}
-            setPlatformList({...platformList, ...allFalse})
-        } else if (val !== 'all') {
-            setPlatformList({
-                ...platformList,
-                all: false,
-                [val]: newBoolVal
-            })
-        }
+    const switchSearchFilters = (val) => {
+        let newFilter = ""
+        setPlatformList({
+            none: false,
+            netflix: false,
+            hulu: false,
+            apple: false,
+            peacock: false,
+            amazon: false,
+            hbomax: false,
+            disneyplus: false,
+            [val] : true
+        })
+        console.log(platformList)
         
-        const newFilter = buildSearchFilter()
+        if (val === "netflix") newFilter += `&siteSearch=www.netflix.com`
+        else if (val === "hulu") newFilter += `&siteSearch=www.hulu.com`
+        else if (val === "apple") newFilter += `&siteSearch=www.tv.apple.com`
+        else if (val === "peacock") newFilter += `&siteSearch=www.peacock.com`
+        else if (val === "amazon") newFilter += `&siteSearch=www.amazon.com`
+        else if (val === "hbomax") newFilter += `&siteSearch=www.hbomax.com`
+        else if (val === "disneyplus") newFilter += `&siteSearch=www.disneyplus.com`
+        
+        if (val !== "none") newFilter += `&siteSearchFilter=e`
         setSearchFilter(newFilter)
-        
-    }
-
-    const buildSearchFilter = () => {
-        let newFilter
-        if (platformList.all) {
-            const allSites = "&siteSearch=www.netflix.com&siteSearch=www.hulu.com&siteSearch=www.peacock.com&siteSearch=www.amazon.com&siteSearch=www.hbomax.com&siteSearch=www.disneyplus.com&siteSearch=www.tv.apple.com"
-            newFilter = allSites
-        } else {
-            newFilter = ""
-            if (platformList.netflix) newFilter += `&siteSearch=www.netflix.com`
-            if (platformList.hulu) newFilter += `&siteSearch=www.hulu.com`
-            if (platformList.apple) newFilter += `&siteSearch=www.tv.apple.com`
-            if (platformList.peacock) newFilter += `&siteSearch=www.peacock.com`
-            if (platformList.amazon) newFilter += `&siteSearch=www.amazon.com`
-            if (platformList.hbomax) newFilter += `&siteSearch=www.hbomax.com`
-            if (platformList.disneyplus) newFilter += `&siteSearch=www.disneyplus.com`
-        }
-        
-        return newFilter ? newFilter += '&siteSearchFilter=i' : ""
-        // console.log(searchFilter)
     }
 
     return (
@@ -148,7 +131,7 @@ export default function SearchModal ({ loadItems }) {
                 style={{display: modalOpen ? "block" : "none"}}
                 >
             
-              <div class="modal-content">
+              <div className="modal-content">
                 
                 <button type="button"
                     className="modal-close-button"
@@ -175,10 +158,10 @@ export default function SearchModal ({ loadItems }) {
                 </form>
                 
                 <div className="platform-list">
-                    <span>Search on: </span>
+                    <span>Exclude: </span>
                     <label className="platform-label">
-                        <input type="checkbox" checked={platformList.all ? "checked": ""}
-                        onChange={(e) => {switchSearchFilters("all")}} />All
+                        <input type="checkbox" checked={platformList.none ? "checked": ""}
+                        onChange={(e) => {switchSearchFilters("none")}} />None
                     </label>
                     <label className="platform-label">
                         <input type="checkbox" checked={platformList.netflix ? "checked": ""}

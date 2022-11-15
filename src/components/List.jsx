@@ -77,7 +77,7 @@ export default function List({ items, setItems, loadItems}) {
                                     </label>
                                 </td>
                                 <td>
-                                    <a href={item.url} target="_blank" text>
+                                    <a href={item.url} target="_blank">
                                         {item.isChecked ? <del>{item.title}</del> : item.title}
                                     </a>
                                 </td> 
@@ -107,5 +107,5 @@ export default function List({ items, setItems, loadItems}) {
         )
     }
 
-    return items ? loaded() : loading
+    return items ? loaded() : loading()
 }
