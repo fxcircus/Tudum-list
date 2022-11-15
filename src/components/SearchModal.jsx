@@ -29,6 +29,7 @@ export default function SearchModal ({ loadItems }) {
     })
     const [ searchFilter, setSearchFilter ] = useState("")
     const [ correctedTitle, setCorrectedTitle ] = useState(null)
+    const [ fadeIn, setFadeIn ] = useState("modal no-fade")
 
     const getUrl = async (title) => {
         setIcon("🌐")
@@ -76,12 +77,14 @@ export default function SearchModal ({ loadItems }) {
     }
 
     const closeModal = () => {
+        setFadeIn("modal no-fade")
         setModalOpen(false)
         setFormData({ title: "" })
         setImg("")
     }
 
     const openModal = () => {
+        setFadeIn("modal fade-in")
         setModalOpen(true)
     }
 
@@ -127,7 +130,7 @@ export default function SearchModal ({ loadItems }) {
         <div>
             { modalOpen ? (
             
-            <div className="modal"
+            <div className={fadeIn}
                 style={{display: modalOpen ? "block" : "none"}}
                 >
             
