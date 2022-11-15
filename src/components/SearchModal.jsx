@@ -160,36 +160,36 @@ export default function SearchModal ({ loadItems }) {
                 <div className="platform-list">
                     <span>Exclude: </span>
                     <label className="platform-label">
-                        <input type="checkbox" checked={platformList.none ? "checked": ""}
+                        <input type="radio" checked={platformList.none ? "checked": ""}
                         onChange={(e) => {switchSearchFilters("none")}} />None
                     </label>
                     <label className="platform-label">
-                        <input type="checkbox" checked={platformList.netflix ? "checked": ""}
+                        <input type="radio" checked={platformList.netflix ? "checked": ""}
                         onChange={(e) => {switchSearchFilters("netflix")}} />Netflix
                     </label>
                     <label className="platform-label">
-                        <input type="checkbox" checked={platformList.hulu ? "checked": ""}
+                        <input type="radio" checked={platformList.hulu ? "checked": ""}
                         onChange={(e) => {switchSearchFilters("hulu")}} />Hulu
                         <span className="checkmark"></span>
                     </label>
                     <label className="platform-label">
-                        <input type="checkbox" checked={platformList.apple ? "checked": ""}
+                        <input type="radio" checked={platformList.apple ? "checked": ""}
                         onChange={(e) => {switchSearchFilters("apple")}} />Apple TV+
                     </label>
                     <label className="platform-label">
-                        <input type="checkbox" checked={platformList.peacock ? "checked": ""}
+                        <input type="radio" checked={platformList.peacock ? "checked": ""}
                         onChange={(e) => {switchSearchFilters("peacock")}} />Peacock
                     </label>
                     <label className="platform-label">
-                        <input type="checkbox" checked={platformList.amazon ? "checked": ""}
+                        <input type="radio" checked={platformList.amazon ? "checked": ""}
                         onChange={(e) => {switchSearchFilters("amazon")}} />Amazon Prime
                     </label>
                     <label className="platform-label">
-                        <input type="checkbox" checked={platformList.hbomax ? "checked": ""}
+                        <input type="radio" checked={platformList.hbomax ? "checked": ""}
                         onChange={(e) => {switchSearchFilters("hbomax")}} />HBO Max
                     </label>
                     <label className="platform-label">
-                        <input type="checkbox"checked={platformList.disneyplus ? "checked": ""}
+                        <input type="radio"checked={platformList.disneyplus ? "checked": ""}
                         onChange={(e) => {switchSearchFilters("disneyplus")}} />Disney
                     </label>
                 </div>
