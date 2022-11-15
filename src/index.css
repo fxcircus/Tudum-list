@@ -359,7 +359,10 @@ a:hover {
     .List {
         margin-bottom: 20px;
     }
-    footer a {
+    /* footer a {
         left: 33%;
+    } */
+    footer {
+        display: none;
     }
 }
