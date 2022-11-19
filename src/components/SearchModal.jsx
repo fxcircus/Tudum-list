@@ -1,9 +1,16 @@
 import { useState } from "react"
 import { createItem } from "../utiliies/api/items-api"
 import { googleTitle } from "../utiliies/api/google-search-api"
-import { set_platform } from '../utiliies/format_data'
 
 export default function SearchModal ({ loadItems }) {
+    const [ modalOpen, setModalOpen ] = useState (false)
+    const [ img, setImg ] = useState ("")
+    const [ icon, setIcon ] = useState("🔎")
+    const [ timer, setTimer ] = useState (null)
+    const [ returnedTitle, setReturnedTitle ] = useState ("")
+    const [ searchFilter, setSearchFilter ] = useState("")
+    const [ correctedTitle, setCorrectedTitle ] = useState(null)
+    const [ fadeIn, setFadeIn ] = useState("modal no-fade")
     const [ formData, setFormData ] = useState ({
         title : "",
         isChecked: false,
@@ -12,11 +19,6 @@ export default function SearchModal ({ loadItems }) {
         type: "tv",
         url: ""
     })
-    const [ modalOpen, setModalOpen ] = useState (false)
-    const [ img, setImg ] = useState ("")
-    const [ icon, setIcon ] = useState("🔎")
-    const [ timer, setTimer ] = useState (null)
-    const [ returnedTitle, setReturnedTitle ] = useState ("")
     const [ platformList, setPlatformList ] = useState ({
         none:true,
         netflix: false,
@@ -27,9 +29,6 @@ export default function SearchModal ({ loadItems }) {
         hbomax: false,
         disneyplus: false
     })
-    const [ searchFilter, setSearchFilter ] = useState("")
-    const [ correctedTitle, setCorrectedTitle ] = useState(null)
-    const [ fadeIn, setFadeIn ] = useState("modal no-fade")
 
     const getUrl = async (title) => {
         setIcon("🌐")
@@ -52,13 +51,11 @@ export default function SearchModal ({ loadItems }) {
     }
 
     const endTimer = () => {
-        console.log("1 second passed, running search!")
         getUrl(formData.title)
     }
 
     const checkTimeout = () => {
         if (timer) {
-            console.log('reseting timer')
             clearTimeout(timer)
             setTimer(setTimeout( endTimer, 1000 ))
         }
@@ -112,7 +109,6 @@ export default function SearchModal ({ loadItems }) {
             disneyplus: false,
             [val] : true
         })
-        console.log(platformList)
         
         if (val === "netflix") newFilter += `&siteSearch=www.netflix.com`
         else if (val === "hulu") newFilter += `&siteSearch=www.hulu.com`
