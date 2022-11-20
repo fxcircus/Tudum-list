@@ -71,7 +71,7 @@ export default function List({ items, setItems, loadItems}) {
                             <tr key={idx}>
                                 <td>
                                     <label className="container">
-                                        <input type="checkbox" checked={item.isChecked ? "checked": null}
+                                        <input type="checkbox" checked={item.isChecked ? "checked": ""}
                                         onChange={(e) => {checkTitle(item, idx)}} />
                                         <span className="checkmark"></span>
                                     </label>

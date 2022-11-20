@@ -30,6 +30,14 @@ export default function SearchModal ({ loadItems }) {
         disneyplus: false
     })
 
+    const regexTitle = (title) => {
+        let newStr = title.replace(/^Watch\s| - Watch.*Paramount Plus/, '')
+        newStr = newStr.replace(/\s\|.*/,'')
+        console.log(newStr)
+        setCorrectedTitle(newStr)
+        // console.log(correctedTitle)
+    }
+
     const getUrl = async (title) => {
         setIcon("🌐")
         const finalSearchTerm = title + searchFilter
@@ -37,16 +45,11 @@ export default function SearchModal ({ loadItems }) {
         setImg(res.pagemap.cse_image[0].src)
         setFormData(formData => ({...formData, url: res.link}))
         setReturnedTitle(res.title)
-        // const regex = /^Watch\s([a-zA-Z0-9\s:']+)\s|/
-        // let match = returnedTitle.match(regex)
-        // console.log(match)
-        // match[1] = match[1].replace('Streaming Online', '')
-        // console.log(match[1])
-        // setCorrectedTitle(match[1])
-        // setModalOpen(true)
+        regexTitle(res.title) 
         setIcon("✔️")
         setTimeout(() => {
-            setIcon("🔎") 
+            setIcon("🔎")
+            
         }, 2000);
     }
 
@@ -112,7 +115,7 @@ export default function SearchModal ({ loadItems }) {
         
         if (val === "netflix") newFilter += `&siteSearch=www.netflix.com`
         else if (val === "hulu") newFilter += `&siteSearch=www.hulu.com`
-        else if (val === "apple") newFilter += `&siteSearch=www.tv.apple.com`
+        else if (val === "apple") newFilter += `&siteSearch=tv.apple.com`
         else if (val === "peacock") newFilter += `&siteSearch=www.peacock.com`
         else if (val === "amazon") newFilter += `&siteSearch=www.amazon.com`
         else if (val === "hbomax") newFilter += `&siteSearch=www.hbomax.com`
