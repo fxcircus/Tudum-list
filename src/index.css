@@ -365,8 +365,14 @@ a:hover {
     }
 
     .platform-list, .platform-list > label {
-        font-size: xx-small;
+        font-size: small;
         flex-direction: column;
+    }
+
+    .modal-content {
+        /* padding: 30px; */
+        width: 60%;
+        
     }
 
     .thumbnail {
@@ -375,7 +381,7 @@ a:hover {
     }
 
     .returned-results {
-        font-size: xx-small;
+        font-size: small;
     }
 
     /* footer a {
