@@ -58,7 +58,7 @@ td {
     color: var(--box-color)
 }
 
-.sort-button:hover, .content-type:hover, .delete-button:hover, .profile-image, .logout-btn {
+.sort-button:hover, .content-type:hover, .delete-button:hover, .profile-image, .logout-btn, .returned-results {
     cursor: pointer;
 }
 
@@ -359,6 +359,25 @@ a:hover {
     .List {
         margin-bottom: 20px;
     }
+
+    .add-new-item-div > input{
+        font-size: large;
+    }
+
+    .platform-list, .platform-list > label {
+        font-size: xx-small;
+        flex-direction: column;
+    }
+
+    .thumbnail {
+        max-height: 64px;
+        max-width: 106px;
+    }
+
+    .returned-results {
+        font-size: xx-small;
+    }
+
     /* footer a {
         left: 33%;
     } */

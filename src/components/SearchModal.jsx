@@ -9,7 +9,6 @@ export default function SearchModal ({ loadItems }) {
     const [ timer, setTimer ] = useState (null)
     const [ returnedTitle, setReturnedTitle ] = useState ("")
     const [ searchFilter, setSearchFilter ] = useState("")
-    const [ correctedTitle, setCorrectedTitle ] = useState(null)
     const [ fadeIn, setFadeIn ] = useState("modal no-fade")
     const [ formData, setFormData ] = useState ({
         title : "",
@@ -30,26 +29,24 @@ export default function SearchModal ({ loadItems }) {
         disneyplus: false
     })
 
-    const regexTitle = (title) => {
-        let newStr = title.replace(/^Watch\s| - Watch.*Paramount Plus/, '')
+    const massageData = (data) => {
+        let newStr = data.title.replace(/^Watch\s| - Watch.*Paramount Plus/, '')
         newStr = newStr.replace(/\s\|.*/,'')
-        console.log(newStr)
-        setCorrectedTitle(newStr)
-        // console.log(correctedTitle)
+        if (newStr) setFormData({ ...formData, title: newStr, url: data.link })
+        else setFormData({ ...formData, url: data.link })
     }
 
     const getUrl = async (title) => {
         setIcon("🌐")
         const finalSearchTerm = title + searchFilter
         let res = await googleTitle(finalSearchTerm)
+        console.log(res.link)
         setImg(res.pagemap.cse_image[0].src)
-        setFormData(formData => ({...formData, url: res.link}))
         setReturnedTitle(res.title)
-        regexTitle(res.title) 
+        massageData(res) 
         setIcon("✔️")
         setTimeout(() => {
             setIcon("🔎")
-            
         }, 2000);
     }
 
@@ -68,7 +65,7 @@ export default function SearchModal ({ loadItems }) {
       }
 
     const handleChange = (event) => {
-        setFormData({...formData, [event.target.name]: event.target.value})
+        setFormData({ ...formData, [event.target.name]: event.target.value })
         checkTimeout(event.target.value)
     }
 
@@ -79,7 +76,7 @@ export default function SearchModal ({ loadItems }) {
     const closeModal = () => {
         setFadeIn("modal no-fade")
         setModalOpen(false)
-        setFormData({ title: "" })
+        setFormData({ ...formData, title: "" })
         setImg("")
     }
 
@@ -90,12 +87,10 @@ export default function SearchModal ({ loadItems }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-        if (correctedTitle) {
-            setFormData(formData => ({...formData, title: correctedTitle}))
-        }
+        
         await createItem (formData)
         closeModal()
-        setFormData({ title: "" })
+        setFormData({ ...formData, title: "" })
         loadItems()
     }
 
@@ -201,9 +196,9 @@ export default function SearchModal ({ loadItems }) {
                 </div>
                 
                 {img ? (
-                    <div className="returned-results">
-                        <p>{returnedTitle}</p>
-                        <img className="thumbnail" src={img} alt="thumbnail" />
+                    <div className="returned-results" >
+                        <p onClick={(e) => {handleSubmit(e)}}>{returnedTitle}</p>
+                        <img className="thumbnail" src={img} alt="thumbnail" onClick={(e) => {handleSubmit(e)}}/>
                     </div>
                 ) :
                 ("")}
