@@ -143,7 +143,7 @@ export default function SearchModal ({ loadItems }) {
                     <input
                         type="text"
                         name="title"
-                        placeholder="List item"
+                        placeholder="Search shows \ movies "
                         value={formData.title}
                         onChange={handleChange}
                         autoFocus

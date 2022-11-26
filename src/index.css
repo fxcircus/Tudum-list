@@ -278,6 +278,7 @@ a:hover {
 .modal-open-button {
     font-size: medium;
     margin-top: 10px;
+    margin-bottom: 10px;
     border: solid var(--box-color);
     border-radius: 5px;
     width: 100%;
@@ -354,10 +355,10 @@ a:hover {
         transform: rotate(45deg);
     }
     .star {
-        font-size: medium;
+        font-size: large;
     }
     .List {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
 
     .add-new-item-div > input{
