@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { createItem } from "../utiliies/api/items-api"
 import { googleTitle } from "../utiliies/api/google-search-api"
+import no_hits_icon from "../utiliies/logos/no_hits.png"
 
 export default function SearchModal ({ loadItems }) {
     const [ modalOpen, setModalOpen ] = useState (false)
@@ -40,14 +41,22 @@ export default function SearchModal ({ loadItems }) {
         setIcon("🌐")
         const finalSearchTerm = title + searchFilter
         let res = await googleTitle(finalSearchTerm)
-        console.log(res.link)
-        setImg(res.pagemap.cse_image[0].src)
-        setReturnedTitle(res.title)
-        massageData(res) 
-        setIcon("✔️")
-        setTimeout(() => {
-            setIcon("🔎")
-        }, 2000);
+        console.log(res)
+        if (res) { 
+            setImg(res.pagemap.cse_image[0].src)
+            setReturnedTitle(res.title)
+            massageData(res) 
+            setIcon("✔️")
+            setTimeout(() => {
+                setIcon("🔎")
+            }, 2000);
+        } else {
+            setReturnedTitle(`No matches for- ${title}\nTry different keywords`)
+            setImg(no_hits_icon)
+            setTimeout(() => {
+                setIcon("🔎")
+            }, 200);
+        }
     }
 
     const endTimer = () => {
@@ -149,7 +158,7 @@ export default function SearchModal ({ loadItems }) {
                         autoFocus
                     />
 
-                    <button type="button" onClick={(e) => {runSearch()}}>{icon}</button>
+                    <button type="button" className="" onClick={(e) => {runSearch()}}>{icon}</button>
 
                     {/* <select className="type-select" name="type" id="type" onChange={handleChange}>
                         <option value="tv">📺</option>
