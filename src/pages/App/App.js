@@ -8,8 +8,8 @@ import { useAuth, useLoginWithRedirect, AdminPortal } from "@frontegg/react"
 
 export default function App() {
     const [ items, setItems ] = useState(null)
-    // const { user, isAuthenticated } = useAuth()
-    const [ isAuthenticated, setIsAuthenticated ] = useState(1) // bypass frontEgg
+    const { user, isAuthenticated } = useAuth()
+    // const [ isAuthenticated, setIsAuthenticated ] = useState(1) // bypass frontEgg
     const loginWithRedirect = useLoginWithRedirect()
 
     const loadItems = async () => {
